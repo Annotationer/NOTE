@@ -1,0 +1,5 @@
+System.nanoTime提供相对精确的计时，但是不能用他来计算当前日期
+
+map.computeIfAbsent()
+public V computeIfAbsent(K key, Function<? super K,? extends V> mappingFunction)
+此方法首先判断缓存MAP中是否存在指定key的值，如果不存在，会自动调用mappingFunction(key)计算key的value，然后将key = value放入到缓存Map,java8会使用thread-safe的方式从cache中存取记录

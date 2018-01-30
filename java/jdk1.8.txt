@@ -1,0 +1,64 @@
+jdk 1.8
+接口可以默认方法
+使用 default关键字即可，这个特征又叫做扩展方法
+interface f{
+     double calculate(int a);
+     default double sqrt(int a){
+          return Match.sqrt(a)     
+     }
+}
+
+lambda 表达式 （匿名函数）
+
+使用 :: 关键字来传递方法或者构造函数引用
+
+
+函数式接口
+将lambda表达式当作任意只包含一个抽象方法的接口类型，确保你的接口一定达到这个要求，你只需要给你的接口添加 @FunctionalInterface 注解，编译器如果发现你标注了这个注解的接口有多于一个抽象方法的时候会报错的。
+
+Lambda 作用域
+
+在lambda表达式中访问外层作用域和老版本的匿名对象中的方式很相似。你可以直接访问标记了final的外层局部变量，或者实例的字段以及静态变量。
+
+我们可以直接在lambda表达式中访问外层的局部变量：
+代码如下:
+
+final int num = 1;
+Converter<Integer, String> stringConverter =
+        (from) -> String.valueOf(from + num);
+stringConverter.convert(2);     // 3
+
+但是和匿名对象不同的是，这里的变量num可以不用声明为final，该代码同样正确：
+代码如下:
+
+int num = 1;
+Converter<Integer, String> stringConverter =
+        (from) -> String.valueOf(from + num);
+stringConverter.convert(2);     // 3
+
+不过这里的num必须不可被后面的代码修改（即隐性的具有final的语义），例如下面的就无法编译：
+代码如下:
+
+int num = 1;
+Converter<Integer, String> stringConverter =
+        (from) -> String.valueOf(from + num);
+num = 3;
+
+在lambda表达式中试图修改num同样是不允许的。
+
+
+访问对象字段与静态变量
+
+和本地变量不同的是，lambda内部对于实例的字段以及静态变量是即可读又可写
+
+Date API
+
+clock,
+Timzones 时区
+LocalTime 本地时间（取系统当前日期）
+LocalDate 本地日期
+LocalDateTime 本地日期时间
+
+
+
+
